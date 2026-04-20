@@ -1,21 +1,17 @@
-import cors from 'cors';
-import express from 'express';
-import { bookingsRouter } from './routes/bookings.js';
-import { eventsRouter } from './routes/events.js';
+import express from "express";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = 5000;
 
-app.use(cors());
+// Middleware: lets the server read JSON bodies (req.body)
 app.use(express.json());
 
-app.get('/api/health', (_req, res) => {
+// Endpoint: quick test that backend is running
+app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
 
-app.use('/api/events', eventsRouter);
-app.use('/api/bookings', bookingsRouter);
-
+// Start the server
 app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
