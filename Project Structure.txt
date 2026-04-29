@@ -1,0 +1,126 @@
+backend/
+│
+├── src/
+│   ├── main.ts                    # App entry
+│   ├── app.module.ts              # Root module
+│
+│   ├── config/                    # Environment + configs
+│   │   ├── env.ts
+│   │   ├── database.config.ts
+│   │   ├── jwt.config.ts
+│   │   └── app.config.ts
+│
+│   ├── common/                    # Shared logic (global)
+│   │   ├── decorators/
+│   │   │   └── current-user.decorator.ts
+│   │   │
+│   │   ├── filters/
+│   │   │   └── http-exception.filter.ts
+│   │   │
+│   │   ├── guards/
+│   │   │   └── jwt-auth.guard.ts
+│   │   │
+│   │   ├── interceptors/
+│   │   │   └── response.interceptor.ts
+│   │   │
+│   │   ├── pipes/
+│   │   │   └── validation.pipe.ts
+│   │   │
+│   │   ├── types/
+│   │   │   └── api-response.type.ts
+│   │   │
+│   │   └── utils/
+│   │       └── pagination.util.ts
+│
+│   ├── database/
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma
+│   │   │   └── migrations/
+│   │   │
+│   │   └── prisma.service.ts
+│
+│   ├── modules/                   # Feature-based structure
+│   │
+│   │   ├── auth/
+│   │   │   ├── auth.module.ts
+│   │   │   ├── auth.controller.ts
+│   │   │   ├── auth.service.ts
+│   │   │   ├── dto/
+│   │   │   │   ├── login.dto.ts
+│   │   │   │   └── register.dto.ts
+│   │   │   └── strategies/
+│   │   │       └── jwt.strategy.ts
+│   │   │
+│   │   ├── users/
+│   │   │   ├── users.module.ts
+│   │   │   ├── users.controller.ts
+│   │   │   ├── users.service.ts
+│   │   │   ├── dto/
+│   │   │   └── entities/
+│   │   │
+│   │   ├── events/
+│   │   │   ├── events.module.ts
+│   │   │   ├── events.controller.ts
+│   │   │   ├── events.service.ts
+│   │   │   │
+│   │   │   ├── dto/
+│   │   │   │   ├── create-event.dto.ts
+│   │   │   │   ├── update-event.dto.ts
+│   │   │   │   └── query-events.dto.ts
+│   │   │   │
+│   │   │   ├── entities/
+│   │   │   │   └── event.entity.ts
+│   │   │   │
+│   │   │   └── mappers/          # DB → API shape
+│   │   │       └── event.mapper.ts
+│   │   │
+│   │   ├── bookings/
+│   │   │   ├── bookings.module.ts
+│   │   │   ├── bookings.controller.ts
+│   │   │   ├── bookings.service.ts
+│   │   │   │
+│   │   │   ├── dto/
+│   │   │   │   ├── create-booking.dto.ts
+│   │   │   │   └── confirm-booking.dto.ts
+│   │   │   │
+│   │   │   ├── entities/
+│   │   │   │   └── booking.entity.ts
+│   │   │   │
+│   │   │   └── mappers/
+│   │   │       └── booking.mapper.ts
+│   │   │
+│   │   ├── payments/
+│   │   │   ├── payments.module.ts
+│   │   │   ├── payments.service.ts
+│   │   │   ├── payments.controller.ts
+│   │   │   └── providers/
+│   │   │       └── paystack.provider.ts
+│   │   │
+│   │   └── health/
+│   │       ├── health.controller.ts
+│   │       └── health.module.ts
+│
+│   ├── integrations/             # External systems
+│   │   ├── email/
+│   │   ├── sms/
+│   │   └── payments/
+│
+│   ├── jobs/                     # Background processing
+│   │   ├── queues/
+│   │   ├── processors/
+│   │   └── workers.ts
+│
+│   ├── routes/                   # API versioning layer
+│   │   └── v1/
+│   │       └── index.ts
+│
+│   └── tests/
+│       ├── unit/
+│       └── e2e/
+│
+├── docker/
+├── .env
+├── .env.example
+├── package.json
+├── tsconfig.json
+└── README.md
