@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"   // SQLite file will be created automatically
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -13,7 +13,7 @@ model User {
   password  String
   firstName String?
   lastName  String?
-  role      Role     @default(USER)
+  role      String   @default("USER")  // Still works with your TS enum
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -43,7 +43,7 @@ model Booking {
   userId     String
   eventId    String
   quantity   Int
-  status     BookingStatus @default(PENDING)
+  status     String   @default("PENDING")  // Still works with your TS enum
   totalPrice Float
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -52,15 +52,4 @@ model Booking {
   event  Event  @relation(fields: [eventId], references: [id])
 
   @@unique([userId, eventId])
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
 }
