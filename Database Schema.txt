@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  role        Role     @default(USER)
+  createdAt   DateTime @default(now())
+
+  bookings    Booking[]
+  events      Event[]  @relation("EventOrganizer")
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  location    String
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime @default(now())
+
+  organizerId String
+  organizer   User     @relation("EventOrganizer", fields: [organizerId], references: [id])
+
+  ticketTypes TicketType[]
+  bookings    Booking[]
+}
+
+model TicketType {
+  id        String   @id @default(uuid())
+  name      String   // e.g. VIP, Regular
+  price     Int      // store in kobo (avoid floats)
+  quantity  Int      // total available
+
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+
+  bookingItems BookingItem[]
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  status      BookingStatus @default(PENDING)
+  totalAmount Int
+  createdAt   DateTime      @default(now())
+
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+
+  eventId     String
+  event       Event         @relation(fields: [eventId], references: [id])
+
+  items       BookingItem[]
+  payment     Payment?
+}
+
+model BookingItem {
+  id            String @id @default(uuid())
+  quantity      Int
+
+  bookingId     String
+  booking       Booking @relation(fields: [bookingId], references: [id])
+
+  ticketTypeId  String
+  ticketType    TicketType @relation(fields: [ticketTypeId], references: [id])
+}
+
+model Payment {
+  id          String        @id @default(uuid())
+  status      PaymentStatus @default(PENDING)
+  amount      Int
+  provider    String        // "stripe", "paystack"
+  reference   String?       // external payment reference
+  createdAt   DateTime      @default(now())
+
+  bookingId   String @unique
+  booking     Booking @relation(fields: [bookingId], references: [id])
+}
