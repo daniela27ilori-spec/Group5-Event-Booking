@@ -9,7 +9,7 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Post('initialize')
-  async initializePayment(@Body('bookingId') bookingId: string, @CurrentUser() user) {
+  async initializePayment(@Body('bookingId') bookingId: string, @CurrentUser() user: any) {
     return this.paymentsService.initializePayment(bookingId, user.id);
   }
 

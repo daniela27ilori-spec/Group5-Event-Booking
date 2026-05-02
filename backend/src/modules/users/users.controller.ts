@@ -9,7 +9,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('me')
-  getProfile(@CurrentUser() user) {
+  getProfile(@CurrentUser() user: any) {
     return this.usersService.findById(user.id);
   }
 
