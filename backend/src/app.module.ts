@@ -4,7 +4,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { EventsModule } from './modules/events/events.module';
 import { BookingsModule } from './modules/bookings/bookings.module';
-import { PaymentsModule } from './modules/payments/payments.module';
+//import { PaymentsModule } from './modules/payments/payments.module';
 import { HealthModule } from './modules/health/health.module';
 import { PrismaService } from './database/prisma.service';
 import appConfig from './config/app.config';
@@ -22,7 +22,7 @@ import jwtConfig from './config/jwt.config';
     UsersModule,
     EventsModule,
     BookingsModule,
-    PaymentsModule,
+   // PaymentsModule,
     HealthModule,
   ],
   providers: [PrismaService],
