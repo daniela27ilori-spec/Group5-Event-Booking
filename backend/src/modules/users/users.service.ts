@@ -21,4 +21,17 @@ export class UsersService {
     const { password, ...result } = user;
     return result;
   }
+
+  // NEW METHOD: For JWT validation - returns null instead of throwing
+  async findByIdForAuth(id: string) {
+    const user = await this.prisma.user.findUnique({ 
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+      }
+    });
+    return user; // Returns null if not found (no error thrown)
+  }
 }
