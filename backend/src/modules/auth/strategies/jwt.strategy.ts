@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
@@ -18,8 +18,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    const user = await this.usersService.findById(payload.sub);
-    if (!user) return null;
+    // Use the new method that returns null instead of throwing
+    const user = await this.usersService.findByIdForAuth(payload.sub);
+    
+    if (!user) {
+      throw new UnauthorizedException('User no longer exists or invalid token');
+    }
+    
     return { id: user.id, email: user.email, role: user.role };
   }
 }
