@@ -1,3 +1,5 @@
+//Intercepts responses to shape output (e.g., add { success, data, message } format)
+
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

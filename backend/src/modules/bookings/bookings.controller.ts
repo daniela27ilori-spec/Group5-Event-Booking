@@ -11,22 +11,22 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  create(@Body() dto: CreateBookingDto, @CurrentUser() user) {
+  create(@Body() dto: CreateBookingDto, @CurrentUser() user: any) {
     return this.bookingsService.create(dto, user.id);
   }
 
   @Get()
-  findAll(@CurrentUser() user) {
+  findAll(@CurrentUser() user: any) {
     return this.bookingsService.findAllByUser(user.id);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string, @CurrentUser() user) {
+  findOne(@Param('id') id: string, @CurrentUser() user: any) {
     return this.bookingsService.findOne(id, user.id);
   }
 
   @Patch(':id/confirm')
-  confirm(@Param('id') id: string, @Body() dto: ConfirmBookingDto, @CurrentUser() user) {
+  confirm(@Param('id') id: string, @Body() dto: ConfirmBookingDto, @CurrentUser() user: any) {
     return this.bookingsService.confirm(id, dto, user.id);
   }
 }

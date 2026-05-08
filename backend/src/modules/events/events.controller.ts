@@ -22,19 +22,19 @@ export class EventsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() dto: CreateEventDto, @CurrentUser() user) {
+  create(@Body() dto: CreateEventDto, @CurrentUser() user: any) {
     return this.eventsService.create(dto, user.id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateEventDto, @CurrentUser() user) {
+  update(@Param('id') id: string, @Body() dto: UpdateEventDto, @CurrentUser() user: any) {
     return this.eventsService.update(id, dto, user.id);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string, @CurrentUser() user) {
+  remove(@Param('id') id: string, @CurrentUser() user: any) {
     return this.eventsService.remove(id, user.id);
   }
 }

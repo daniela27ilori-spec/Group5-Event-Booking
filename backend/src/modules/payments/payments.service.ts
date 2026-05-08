@@ -16,9 +16,13 @@ export class PaymentsService {
     });
     if (!booking) throw new NotFoundException('Booking not found');
     if (booking.status !== 'PENDING') throw new BadRequestException('Booking already processed');
+    
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new NotFoundException('User not found');
+    
     const paymentUrl = await this.paystack.initializePayment({
       amount: booking.totalPrice,
-      email: (await this.prisma.user.findUnique({ where: { id: userId } })).email,
+      email: user.email,
       reference: `BOOK-${booking.id}-${Date.now()}`,
       metadata: { bookingId: booking.id },
     });
@@ -26,8 +30,6 @@ export class PaymentsService {
   }
 
   async handleWebhook(payload: any) {
-    // Verify signature & update booking status
-    // Implementation depends on Paystack webhook signature
     console.log('Webhook received', payload);
     return { received: true };
   }
