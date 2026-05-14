@@ -46,6 +46,10 @@
   "capacity": 100
 }
 ```
+## Screenshots 
+<img width="477" height="433" alt="Screenshot-event" src="https://github.com/user-attachments/assets/035c4694-075c-4eca-8ae8-7d166748620d" />
+<img width="473" height="436" alt="Screenshot-event2" src="https://github.com/user-attachments/assets/01903642-9b89-43ce-a2af-205602971f52" />
+
 
 ## Tested By
 
