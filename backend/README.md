@@ -1,10 +1,20 @@
 # Event Booking Backend
 
 ## Setup
-1. Copy `.env.example` to `.env` and fill in your database URL, JWT secret, Paystack keys.
-2. Run `npm install`
-3. Run `npx prisma migrate dev --name init`
-4. Run `npm run start:dev`
+# 1. Install dependencies
+npm install
+
+# 2. Create .env file in the backend folder and copy the template from the env.example
+
+
+# 4. Create the database and all tables
+npx prisma db push
+
+# 5. Generate Prisma client (TypeScript types for database)
+npx prisma generate
+
+# 6. Start the server
+npm run start:dev
 
 ## API Endpoints
 - `POST /api/v1/auth/register` â€“ Register user
@@ -19,4 +29,4 @@
 See `.env.example` for required variables.
 
 ## Technologies
-- NestJS, Prisma, PostgreSQL, JWT, Paystack
+- NestJS, Prisma, JWT, Sqlite
