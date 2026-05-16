@@ -29,7 +29,7 @@ This project was developed as part of the CSC 202 – Computer Programming II gr
 - Paystack
 
 ### Database
-- PostgreSQL
+- Sqlite
 
 ### Tools
 - Git & GitHub
@@ -75,7 +75,7 @@ git clone https://github.com/daniela27ilori-spec/Group5-Event-Booking
 ```bash
 cd backend
 npm install
-npm run dev
+npm run start:dev
 ```
 
 Backend runs on:
