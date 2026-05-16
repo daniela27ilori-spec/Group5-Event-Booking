@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Menu, X, LogOut, User, Settings } from 'lucide-react';
 
@@ -42,38 +43,27 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#F9CBD6' }}>
+    <nav className="sticky top-0 z-50 shadow-lg bg-[#F9CBD6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div 
+            <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: '#670626' }}
             >
-              <span className="text-white font-bold text-lg" style={{ color: '#FFFFFF' }}>E</span>
+              <Image src="/favicon.ico" alt="Piked Events" width={32} height={32} />
             </div>
-            <span className="hidden sm:inline font-bold text-lg" style={{ color: '#670626' }}>
-              EventBook
-            </span>
+            <span className="hidden sm:inline font-bold text-[#670626]">Piked Events</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {displayNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                style={{ color: '#670626' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFBDC5';
-                  e.currentTarget.style.color = '#670626';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#670626';
-                }}
+                className="px-3 py-2 rounded-md text-sm font-medium text-[#670626] transition hover:bg-[#FFBDC5]"
               >
                 {item.label}
               </Link>
@@ -160,7 +150,10 @@ const Navbar = () => {
                   href="/register"
                   className="px-4 py-2 rounded-md text-sm font-medium transition-colors"
                   style={{ backgroundColor: '#670626', color: '#FFFFFF' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFBDC5'}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#FFBDC5';
+                    e.currentTarget.style.color = '#670626';
+                  }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = '#670626';
                     e.currentTarget.style.color = '#FFFFFF';
@@ -192,10 +185,7 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-3 py-2 rounded-md text-base font-medium transition-colors block w-full text-left"
-                  style={{ color: '#670626' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFBDC5'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                  className="px-3 py-2 rounded-md text-base font-medium text-[#670626] transition-colors block w-full text-left hover:bg-[#FFBDC5]"
                 >
                   {item.label}
                 </Link>
@@ -206,10 +196,7 @@ const Navbar = () => {
                   <Link
                     href="/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="px-3 py-2 rounded-md text-base font-medium transition-colors block w-full text-left"
-                    style={{ color: '#670626' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFBDC5'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                    className="px-3 py-2 rounded-md text-base font-medium text-[#670626] transition-colors block w-full text-left hover:bg-[#FFBDC5]"
                   >
                     Sign In
                   </Link>
@@ -218,7 +205,10 @@ const Navbar = () => {
                     onClick={() => setIsMenuOpen(false)}
                     className="px-3 py-2 rounded-md text-base font-medium transition-colors block w-full text-left"
                     style={{ backgroundColor: '#670626', color: '#FFFFFF' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FFBDC5'}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#FFBDC5';
+                      e.currentTarget.style.color = '#670626';
+                    }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = '#670626';
                       e.currentTarget.style.color = '#FFFFFF';
