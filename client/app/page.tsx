@@ -52,7 +52,7 @@ export default function Home() {
 
         <Link
           href="/events"
-          className="mt-8 inline-flex items-center justify-center rounded-full bg-[#3a9668] px-8 py-3 text-base font-semibold text-white transition hover:bg-[#2d7a54]"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-[#670626] px-8 py-3 text-base font-semibold text-white transition hover:bg-[#8a0a35]"
         >
           Browse events
         </Link>
