@@ -1,4 +1,4 @@
-# Backend Development Summary – Group 5 (Event Booking System)
+# Backend Development Summary – Group 5 (Piked Events)
 
 ## 1. Initial Setup & Architecture
 
