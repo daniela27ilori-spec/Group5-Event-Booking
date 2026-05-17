@@ -21,7 +21,7 @@
 | Modules           | Generated auth, users, events, bookings, payments, health modules |
 | Auth              | Register, login, JWT strategy, guards                             |
 | Events CRUD       | GET all, GET one, POST, PATCH, DELETE                             |
-| Bookings          | Create booking, list user bookings, confirm (mock payment)        |
+| Bookings          | Create booking, list user bookings no real payment (mock only)       |
 | Health            | Endpoint with database ping                                       |
 | CORS              | Enabled for frontend (any origin, credentials allowed)            |
 | Error handling    | Fixed JWT to return 401, not 404                                  |
@@ -86,4 +86,4 @@
 - Migrations are essential for deployment.
 - CORS must be configured early for frontend team.
 - Keep test files outside `src/` to avoid compile errors.
-- Document API changes in a shared collection (Thunder Client/Postman).
+- Document API changes in a shared collection (Thunder Client).
