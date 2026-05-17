@@ -1,14 +1,13 @@
-# Event Booking System
-
+# Piked Events (Event Booking System)
+ 
 ## Overview
-The Event Booking System is a full-stack web application that allows users to browse events, book tickets, and manage reservations online.
+Piked Events is a full-stack web application that allows users to browse events, book tickets, and manage reservations online.
 This project was developed as part of the CSC 202 – Computer Programming II group project.
 
 ---
 
 ## Features
 
-- User registration and login
 - Browse available events
 - Book event tickets
 - View booking history
@@ -26,7 +25,7 @@ This project was developed as part of the CSC 202 – Computer Programming II gr
 - Nestjs
 - Express.js
 - Prisma
-- Paystack
+- Paystack (demo)
 
 ### Database
 - PostgreSQL
