@@ -1,9 +1,49 @@
+'use client';
 import Navbar from "../../components/Navbar";
+import {useRouter} from 'next/navigation';
 const picnic = "/assets/picnic.jpg";
 const MovieNight = "/assets/movie.jpg";
 const TechSummit = "/assets/tech.jpg";
 
 export default function Dashboard() {
+  const router = useRouter();
+  const sidebarItemStyle = {
+    margin: "15px 0",
+    padding: "10px",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "0.2s",
+    color: "white",
+  };
+
+  const buttonStyle = {
+    marginTop: "8px",
+    padding: "6px 10px",
+    borderRadius: "8px",
+    border: "none",
+    backgroundColor: "#670626",
+    color: "white",
+    cursor: "pointer",
+    transition: "0.2s",
+  };
+
+  const searchButton = {
+      padding: "8px 15px",
+      borderRadius: "25px",
+      border: "none",
+      backgroundColor: "#670626",
+      color: "white",
+      cursor: "pointer",
+      transition: "0.2s"
+    }
+
+  const handleHover = (e) => {
+  e.currentTarget.style.backgroundColor = "rgba(103, 6, 38, 0.7)";
+};
+
+const handleLeave = (e) => {
+  e.currentTarget.style.backgroundColor = "#670626";
+};
     return(
         <>
       <Navbar  />
@@ -32,9 +72,44 @@ export default function Dashboard() {
 >
   Dashboard
 </p>
-        <p style={{margin: "15px 0"}}>Profile</p>
-        <p style={{margin: "15px 0"}}>Tickets</p>
-        <p style={{margin: "15px 0"}}>Settings</p>
+        <p onClick={() => router.push('/profile')}
+  style={sidebarItemStyle}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "rgba(255, 197, 209, 0.5)";
+    e.currentTarget.style.color = "#670626";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "white";
+  }}
+>
+  Profile
+          </p>
+        <p onClick={() => router.push('/tickets')}
+  style={sidebarItemStyle}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "rgba(255, 197, 209, 0.5)";
+    e.currentTarget.style.color = "#670626";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "white";
+  }}
+>
+  Tickets
+          </p>
+        <p onClick={() => router.push('/settings')}
+  style={sidebarItemStyle}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "rgba(255, 197, 209, 0.5)";
+    e.currentTarget.style.color = "#670626";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "white";
+  }}
+>
+  Settings</p>
 
       </div>
 
@@ -82,16 +157,11 @@ export default function Dashboard() {
   />
 
   <button
-    style={{
-      padding: "8px 15px",
-      borderRadius: "25px",
-      border: "none",
-      backgroundColor: "#670626",
-      color: "white",
-      cursor: "pointer",
-    }}
-  >
-    Search
+    style={searchButton}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  Search
   </button>
 </div>
 
@@ -122,9 +192,13 @@ export default function Dashboard() {
             <h3 style={{fontSize:"25px"}}>Total Events</h3>
             <p style={{fontSize:"20px"}}>12</p>
 
-             <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+             <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
+              
           </div>
 
           <div style={{
@@ -140,8 +214,11 @@ export default function Dashboard() {
             <h3 style={{fontSize:"25px"}}>My bookings</h3>
             <p style={{fontSize:"20px"}}>12</p>
 
-             <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+             <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
           </div>
 
@@ -159,8 +236,11 @@ export default function Dashboard() {
             <h3 style={{fontSize:"25px"}}>Future Events</h3>
             <p style={{fontSize:"20px"}}>12</p>
             
-            <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+            <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
           </div>
 
@@ -199,8 +279,11 @@ export default function Dashboard() {
             <div style={{padding:"12px"}}>
               <h3 style={{color:"#670626", margin:"0"}}>Picnic with Friends</h3>
               <p style={{fontSize:"12px"}}>12 Oct 2026 • 3:00 PM</p>
-              <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+              <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
             </div>
           </div>
@@ -218,8 +301,11 @@ export default function Dashboard() {
             <div style={{padding:"12px"}}>
               <h3 style={{color:"#670626", margin:"0"}}>Movie Night</h3>
               <p style={{fontSize:"12px"}}>15 Oct 2026 • 6:00 PM</p>
-              <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+              <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
             </div>
           </div>
@@ -237,8 +323,11 @@ export default function Dashboard() {
             <div style={{padding:"12px"}}>
               <h3 style={{color:"#670626", margin:"0"}}>Tech Summit</h3>
               <p style={{fontSize:"12px"}}>20 Oct 2026 • 10:00 AM</p>
-              <button style={{marginTop:"8px", padding:"6px 10px", borderRadius:"8px", border:"none", backgroundColor:"#670626", color:"white"}}>
-                View
+              <button style={buttonStyle}
+  onMouseEnter={handleHover}
+  onMouseLeave={handleLeave}
+>
+  View
               </button>
             </div>
           </div>
@@ -248,7 +337,7 @@ export default function Dashboard() {
 
 
 <h1 style={{
-  color: "#670620",
+  color: "#670626",
   fontSize:"35px",
   marginTop:"30px",
   alignSelf:"flex-start",
