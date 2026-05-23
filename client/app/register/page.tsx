@@ -3,7 +3,6 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import api from "../../services/api";
 
 export default function Register() {
   const router = useRouter();
@@ -19,36 +18,23 @@ export default function Register() {
     event.preventDefault();
     setError("");
 
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setError("Please complete all fields.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
     setLoading(true);
-
-    try {
-      const response = await api.post("/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
-
-      localStorage.setItem("token", response.access_token);
-      localStorage.setItem("userId", response.user.id);
-      localStorage.setItem("userRole", "user");
-      router.push("/dashboard");
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Unable to sign up. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    router.push("/dashboard");
+    setLoading(false);
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f7f7] px-4 py-16 sm:px-6 lg:px-8">
+    <main className="min-h-screen px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-br from-[#f3e7f7] to-[#fde3ea]">
       <div className="mx-auto max-w-xl rounded-[32px] bg-white p-10 shadow-xl border border-gray-200">
         <h1 className="text-4xl font-bold text-[#670626]">Create account</h1>
         <p className="mt-3 text-gray-600">

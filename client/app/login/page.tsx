@@ -3,7 +3,6 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import api from "../../services/api";
 
 export default function Login() {
   const router = useRouter();
@@ -17,23 +16,20 @@ export default function Login() {
     setError("");
     setLoading(true);
 
-    try {
-      const response = await api.post("/auth/login", { email, password });
-      localStorage.setItem("token", response.access_token);
-      localStorage.setItem("userId", response.user.id);
-      localStorage.setItem("userRole", "user");
-      router.push("/dashboard");
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Unable to sign in. Please try again."
-      );
-    } finally {
+    if (!email || !password) {
+      setError("Please fill in both fields.");
       setLoading(false);
+      return;
     }
+
+    router.push("/dashboard");
+    setLoading(false);
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f7f7] px-4 py-16 sm:px-6 lg:px-8">
+    <main
+      className="min-h-screen px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-br from-[#f9cbd6] to-[#fde3ea]"
+    >
       <div className="mx-auto max-w-xl rounded-[32px] bg-white p-10 shadow-xl border border-gray-200">
         <h1 className="text-4xl font-bold text-[#670626]">Sign in</h1>
         <p className="mt-3 text-gray-600">
@@ -92,5 +88,3 @@ export default function Login() {
     </main>
   );
 }
-
-export default Login;
