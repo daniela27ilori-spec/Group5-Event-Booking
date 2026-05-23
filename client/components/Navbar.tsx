@@ -54,7 +54,7 @@ const Navbar = () => {
               <span className="text-white font-bold text-lg" style={{ color: '#FFFFFF' }}>E</span>
             </div>
             <span className="hidden sm:inline font-bold text-lg" style={{ color: '#670626' }}>
-              EventBook
+              Piked Events
             </span>
           </Link>
 
