@@ -7,7 +7,6 @@ This project was developed as part of the CSC 202 – Computer Programming II gr
 ---
 
 ## Features
-
 - Browse available events
 - Book event tickets
 - View booking history
@@ -80,7 +79,7 @@ npm run dev
 Backend runs on:
 
 ```bash
-http://localhost:5000
+http://localhost:3000
 ```
 
 ---
@@ -139,7 +138,6 @@ This project follows GitHub collaboration best practices:
 - Payment integration
 - Email notifications
 - Search and filtering
-- Admin dashboard
 - QR code verification
 
 ---
