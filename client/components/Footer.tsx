@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Phone, MapPin, Globe2, Share2, Star } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,8 +18,8 @@ const Footer = () => {
             {/* Brand Section */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-10 h-10 bg-[#FFBDC5] rounded-lg flex items-center justify-center">
-                  <span className="text-[#670626] font-bold text-lg">P</span>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                  <Image src="/favicon.ico" alt="Piked Events" width={40} height={40} />
                 </div>
                 <span className="font-bold text-xl">Piked Events</span>
               </div>
@@ -115,27 +116,27 @@ const Footer = () => {
             <div className="flex items-center space-x-4">
               <a
                 href="#"
-                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-white transition-colors"
+                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-[#F9CBD6] transition-colors"
               >
-                <Facebook size={18} />
+                <Globe2 size={18} />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-white transition-colors"
+                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-[#F9CBD6] transition-colors"
               >
-                <Instagram size={18} />
+                <Share2 size={18} />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-white transition-colors"
+                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-[#F9CBD6] transition-colors"
               >
-                <Twitter size={18} />
+                <Star size={18} />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-white transition-colors"
+                className="w-10 h-10 bg-[#FFBDC5] rounded-full flex items-center justify-center text-[#670626] hover:bg-[#F9CBD6] transition-colors"
               >
-                <Linkedin size={18} />
+                <Mail size={18} />
               </a>
             </div>
 
