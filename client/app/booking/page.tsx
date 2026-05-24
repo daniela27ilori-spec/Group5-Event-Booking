@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Navbar from "../../components/Navbar";
 import { Calendar, MapPin, Trash2, Clock } from 'lucide-react';
 
@@ -10,7 +11,7 @@ interface Booking {
   date: string;
   time: string;
   location: string;
-  status: 'confirmed' | 'pending' | 'cancelled';
+  status: 'Confirmed' | 'Pending' | 'Cancelled';
   image: string;
   ticketCount: number;
   price: number;
@@ -23,8 +24,8 @@ const mockBookings: Booking[] = [
     date: '14 June 2026',
     time: '8:00 PM',
     location: 'Tiwa Towers, Lagos',
-    status: 'confirmed',
-    image: '/images/amapiano.jpg',
+    status: 'Confirmed',
+    image: '/images/Amapiano.jpg',
     ticketCount: 2,
     price: 15000,
   },
@@ -34,8 +35,8 @@ const mockBookings: Booking[] = [
     date: '5 September 2026',
     time: '7:30 PM',
     location: 'Eko Convention Center',
-    status: 'pending',
-    image: '/images/asake.jpg',
+    status: 'Pending',
+    image: '/images/Asake.jpg',
     ticketCount: 1,
     price: 25000,
   },
@@ -45,8 +46,8 @@ const mockBookings: Booking[] = [
     date: '2 July 2026',
     time: '6:30 PM',
     location: 'Victoria Island Theater',
-    status: 'confirmed',
-    image: '/images/fatherland.jpg',
+    status: 'Confirmed',
+    image: '/images/Fatherland.jpg',
     ticketCount: 3,
     price: 45000,
   },
@@ -61,11 +62,11 @@ export default function BookingPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'confirmed':
+      case 'Confirmed':
         return 'bg-green-100 text-green-800';
-      case 'pending':
+      case 'Pending':
         return 'bg-yellow-100 text-yellow-800';
-      case 'cancelled':
+      case 'Cancelled':
         return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -74,9 +75,9 @@ export default function BookingPage() {
 
   const getStatusBg = (status: string) => {
     switch (status) {
-      case 'confirmed':
+      case 'Confirmed':
         return '#670626';
-      case 'pending':
+      case 'Pending':
         return '#FFBDC5';
       default:
         return '#F9CBD6';
@@ -85,8 +86,6 @@ export default function BookingPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
-      
       <div className="px-4 py-12 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -94,7 +93,9 @@ export default function BookingPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#670626]">
               My Bookings
             </p>
-            <h1 className="mt-3 text-4xl font-bold text-white">Your Events</h1>
+            <h1 className="mt-3 text-4xl font-bold" style={{ color: '#ffffff' }}>
+  Your Events
+</h1>
             <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
               View and manage all your event bookings in one place.
             </p>
@@ -126,15 +127,16 @@ export default function BookingPage() {
                   className="group rounded-[28px] border border-gray-700 bg-[#1a1a1a] overflow-hidden transition hover:shadow-lg hover:border-gray-600"
                 >
                   {/* Card Header with Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                    <div className="text-center">
-                      <div
-                        className="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center"
-                        style={{ backgroundColor: '#F9CBD6' }}
-                      >
-                        <Calendar className="w-8 h-8" style={{ color: '#670626' }} />
-                      </div>
-                      <p className="text-sm text-gray-400">Event Ticket</p>
+                  <div className="relative h-48 w-full bg-gray-800">
+                    <Image
+                      src={booking.image}
+                      alt={booking.eventTitle}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute left-4 top-4 px-3 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: getStatusBg(booking.status), color: booking.status === 'Pending' ? '#670626' : '#fff' }}>
+                      {booking.status}
                     </div>
                   </div>
 
