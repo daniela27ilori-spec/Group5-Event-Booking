@@ -54,7 +54,9 @@ const Navbar = () => {
             >
               <Image src="/favicon.ico" alt="Piked Events" width={32} height={32} />
             </div>
-            <span className="hidden sm:inline font-bold text-[#670626]">Piked Events</span>
+            <span className="hidden sm:inline font-bold text-lg" style={{ color: '#670626' }}>
+              Piked Events
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
