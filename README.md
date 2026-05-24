@@ -156,7 +156,14 @@ https://github.com/daniela27ilori-spec/Group5-Event-Booking
 
 ## Screenshots
 ### Events Page 
-add in images later 
+<img width="958" height="506" alt="pikedevents" src="https://github.com/user-attachments/assets/4cb88d13-dcb3-4bac-b228-109bc40f49db" />
+
+## My Bookings Page
+<img width="960" height="506" alt="pikedvents3" src="https://github.com/user-attachments/assets/65694b7a-61af-4694-b8d8-29b7df45455a" />
+
+## Dashboard
+
+
 
 
 --
