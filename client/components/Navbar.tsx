@@ -5,14 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Menu, X, LogOut, User, Settings } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const router = useRouter();
+  const { isAuthenticated, user, logout } = useAuth();
 
-  const isAuthenticated = typeof window !== 'undefined' ? !!localStorage.getItem('token') : false;
-  const userRole = typeof window !== 'undefined' ? localStorage.getItem('userRole') : null;
+  const userRole = user?.role;
 
   const navItems = [
     { label: 'Home', href: '/' },
@@ -30,11 +31,8 @@ const Navbar = () => {
   const displayNavItems = userRole === 'admin' ? adminNavItems : navItems;
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userId');
+    logout();
     setIsUserMenuOpen(false);
-    router.push('/login');
   };
 
   const handleProfileClick = () => {
@@ -87,7 +85,7 @@ const Navbar = () => {
                     className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{ backgroundColor: '#670626' }}
                   >
-                    <span className="text-white text-sm font-bold" style={{ color: '#FFFFFF' }}>U</span>
+                    <span className="text-white text-sm font-bold">{user?.firstName?.[0] || 'U'}</span>
                   </div>
                   <span className="hidden sm:inline">Account</span>
                 </button>

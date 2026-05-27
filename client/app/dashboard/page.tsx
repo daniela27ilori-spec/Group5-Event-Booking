@@ -1,5 +1,8 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 const picnic = "/images/picnic.jpg";
 const MovieNight = "/images/movie.jpg";
@@ -7,6 +10,7 @@ const TechSummit = "/images/tech.jpg";
 
 export default function Dashboard() {
     return (
+      <ProtectedRoute>
       <div
         style={{
           display: "flex",
@@ -407,5 +411,6 @@ export default function Dashboard() {
 </div>
       </div>
       </div>
+      </ProtectedRoute>
     );
 }
