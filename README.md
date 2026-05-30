@@ -144,7 +144,9 @@ This project follows GitHub collaboration best practices:
 
 ## Live Demo
 
-deployed link .
+Frontend: https://group5-event-booking.vercel.app/
+
+Backend : https://group5-backend.onrender.com/ 
 
 ---
 
