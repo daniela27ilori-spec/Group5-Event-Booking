@@ -4,37 +4,43 @@ import Link from "next/link";
 export default function Home() {
   const events = [
     {
-      title: "Amapiano District",
+      title: "Amapiano District Concert",
+      id: "event-amapiano",
       location: "Lagos",
       date: "June 14, 2026",
       image: "/images/Amapiano.jpg",
     },
     {
-      title: "Fatherland",
+      title: "Fatherland Festival",
+      id: "event-fatherland",
       location: "Victoria Island",
       date: "July 2, 2026",
       image: "/images/Fatherland.jpg",
     },
     {
-      title: "Soundcity Uni Tour",
+      title: "Soundcity Uni-Tour",
+      id: "event-soundcity-uni-tour",
       location: "UNILAG",
       date: "August 10, 2026",
       image: "/images/sound.jpg",
     },
     {
-      title: "Asake Live in Lagos",
+      title: "Asake Live Lagos",
+      id: "event-asake",
       location: "Eko Convention Center",
       date: "September 5, 2026",
       image: "/images/Asake.jpg",
     },
     {
-      title: "Praise This",
+      title: "Praise This! Worship Night",
+      id: "event-praise-this",
       location: "Lekki",
       date: "October 1, 2026",
       image: "/images/praisethis.jpg",
     },
     {
       title: "Nike Art Gallery Auction",
+      id: "event-nike-art-gallery-auction",
       location: "Nike Art Gallery",
       date: "November 12, 2026",
       image: "/images/nike-arts.jpg",
@@ -81,9 +87,12 @@ export default function Home() {
                 <h3 className="text-xl font-semibold">{event.title}</h3>
                 <p className="text-gray-400 mt-2">{event.location}</p>
                 <p className="text-sm text-gray-500 mt-1">{event.date}</p>
-                <button className="mt-5 w-full bg-[#670626] hover:bg-[#8a0a35] py-2 rounded-lg">
-                  Book Ticket
-                </button>
+                <Link
+                  href={`/events/${event.id}`}
+                  className="mt-5 inline-flex w-full items-center justify-center bg-[#670626] hover:bg-[#8a0a35] py-2 rounded-lg text-center text-sm font-semibold"
+                >
+                  Book Tickets
+                </Link>
               </div>
             </div>
           ))}

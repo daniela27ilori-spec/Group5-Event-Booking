@@ -29,4 +29,9 @@ export class BookingsController {
   confirm(@Param('id') id: string, @Body() dto: ConfirmBookingDto, @CurrentUser() user: any) {
     return this.bookingsService.confirm(id, dto, user.id);
   }
+
+  @Patch(':id/cancel')
+  cancel(@Param('id') id: string, @CurrentUser() user: any) {
+    return this.bookingsService.cancel(id, user.id);
+  }
 }

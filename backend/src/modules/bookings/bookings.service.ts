@@ -60,4 +60,18 @@ export class BookingsService {
       include: { event: true },
     });
   }
+
+  async cancel(id: string, userId: string) {
+    const booking = await this.prisma.booking.findFirst({
+      where: { id, userId },
+      include: { event: true },
+    });
+    if (!booking) throw new NotFoundException('Booking not found');
+    if (booking.status === 'CANCELLED') throw new BadRequestException('Booking already cancelled');
+    return this.prisma.booking.update({
+      where: { id },
+      data: { status: 'CANCELLED' },
+      include: { event: true },
+    });
+  }
 }

@@ -39,6 +39,11 @@ const parseResponse = async (response: Response) => {
     throw new Error(message || 'API request failed');
   }
 
+  // Unwrap nested response payloads like { data: { data: [...] } }
+  if (result?.data?.data !== undefined) {
+    return result.data.data;
+  }
+
   return result?.data ?? result;
 };
 

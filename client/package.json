@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "eslint"
   },
   "dependencies": {
+    "event-booking": "file:..",
     "lucide-react": "^1.16.0",
     "next": "16.2.4",
     "react": "19.2.4",

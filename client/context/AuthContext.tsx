@@ -13,6 +13,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>;
   register: (payload: { firstName: string; lastName: string; email: string; password: string; }) => Promise<void>;
   logout: () => void;
+  updateUser: (user: User) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -23,25 +24,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const fetchProfile = async () => {
+    try {
+      const profile = await api.get<User>('/users/me');
+      setUser(profile);
+      localStorage.setItem('user', JSON.stringify(profile));
+      return profile;
+    } catch {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setToken(undefined);
+      setUser(undefined);
+      return undefined;
+    }
+  };
+
   useEffect(() => {
     if (typeof window === 'undefined') {
       setLoading(false);
       return;
     }
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
 
-    if (storedToken) {
-      setToken(storedToken);
-    }
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch {
-        localStorage.removeItem('user');
+    const initialize = async () => {
+      const storedToken = localStorage.getItem('token');
+      const storedUser = localStorage.getItem('user');
+
+      if (storedToken) {
+        setToken(storedToken);
       }
-    }
-    setLoading(false);
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch {
+          localStorage.removeItem('user');
+        }
+      }
+
+      if (storedToken) {
+        await fetchProfile();
+      }
+
+      setLoading(false);
+    };
+
+    initialize();
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -72,6 +98,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/login');
   };
 
+  const updateUser = (updatedUser: User) => {
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+  };
+
   const value = useMemo(
     () => ({
       user,
@@ -81,6 +112,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       login,
       register,
       logout,
+      updateUser,
     }),
     [user, token, loading],
   );

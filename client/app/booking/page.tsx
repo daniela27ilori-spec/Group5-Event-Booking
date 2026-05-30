@@ -41,8 +41,26 @@ export default function BookingPage() {
     loadBookings();
   }, []);
 
-  const handleCancelBooking = (id: string) => {
-    setBookings((current) => current.filter((booking) => booking.id !== id));
+  const handleCancelBooking = async (id: string) => {
+    setError('');
+
+    try {
+      await api.patch(`/bookings/${id}/cancel`, {});
+      setBookings((current) => current.filter((booking) => booking.id !== id));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to cancel booking');
+    }
+  };
+
+  const handleConfirmBooking = async (id: string) => {
+    setError('');
+
+    try {
+      const updated = await api.patch<{ status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' }>(`/bookings/${id}/confirm`, { paymentConfirmed: true });
+      setBookings((current) => current.map((booking) => booking.id === id ? { ...booking, status: updated.status } : booking));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to confirm booking');
+    }
   };
 
   const getStatusBg = (status: string) => {
@@ -171,6 +189,16 @@ export default function BookingPage() {
                           </p>
                         </div>
                       </div>
+
+                      {booking.status === 'PENDING' && (
+                        <button
+                          onClick={() => handleConfirmBooking(booking.id)}
+                          className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3 rounded-full font-semibold text-white transition hover:opacity-90"
+                          style={{ backgroundColor: '#670626' }}
+                        >
+                          Confirm Booking
+                        </button>
+                      )}
 
                       <button
                         onClick={() => handleCancelBooking(booking.id)}
