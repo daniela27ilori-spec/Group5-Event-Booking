@@ -1,64 +1,31 @@
-import Link from "next/link";
-import { Star } from "lucide-react";
+'use client';
 
-const events = [
-  {
-    id: "amapiano-district",
-    title: "Amapiano District",
-    date: "14 June 2026",
-    time: "8:00 PM",
-    venue: "Tiwa Towers, Lagos",
-    rating: 4.9,
-    description: "A high-energy Amapiano showcase with top DJs, dancers, and immersive visuals.",
-  },
-  {
-    id: "fatherland",
-    title: "Fatherland: The Musical",
-    date: "2 July 2026",
-    time: "6:30 PM",
-    venue: "Victoria Island Theater",
-    rating: 4.8,
-    description: "A dramatic live musical celebrating heritage, courage, and identity.",
-  },
-  {
-    id: "soundcity-uni-tour",
-    title: "Soundcity Uni Tour",
-    date: "10 August 2026",
-    time: "4:00 PM",
-    venue: "UNILAG Stadium",
-    rating: 4.7,
-    description: "Campus festival energy with rap battles, guest DJs, and the hottest Afropop acts.",
-  },
-  {
-    id: "asake-live-lagos",
-    title: "Asake Live in Lagos",
-    date: "5 September 2026",
-    time: "7:30 PM",
-    venue: "Eko Convention Center",
-    rating: 4.9,
-    description: "An unforgettable concert experience featuring Asake's biggest hits and stage production.",
-  },
-  {
-    id: "praise-this",
-    title: "Praise This",
-    date: "1 October 2026",
-    time: "5:00 PM",
-    venue: "Lekki Arena",
-    rating: 4.6,
-    description: "An uplifting worship concert with live gospel performances and choir sessions.",
-  },
-  {
-    id: "nike-art-gallery-auction",
-    title: "Nike Art Gallery Auction",
-    date: "12 November 2026",
-    time: "3:00 PM",
-    venue: "Nike Art Gallery",
-    rating: 4.5,
-    description: "A curated art auction featuring contemporary pieces and collector networking.",
-  },
-];
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Star } from 'lucide-react';
+import api from '../../services/api';
+import type { Event } from '../../types';
 
 export default function EventsPage() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const events = await api.get<Event[]>('/events');
+        setEvents(events);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load events.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadEvents();
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -70,36 +37,46 @@ export default function EventsPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {events.map((event) => (
-            <Link
-              key={event.id}
-              href={`/events/${event.id}`}
-              className="group block rounded-[28px] border border-gray-700 bg-[#1a1a1a] p-8 transition hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gray-400">{event.date}</p>
-                  <h2 className="mt-3 text-2xl font-bold text-white">{event.title}</h2>
-                  <p className="mt-3 text-sm text-gray-400">{event.description}</p>
+        {loading ? (
+          <div className="rounded-[28px] border border-gray-700 bg-[#1a1a1a] p-8 text-center text-gray-400">
+            Loading events...
+          </div>
+        ) : error ? (
+          <div className="rounded-[28px] border border-red-700 bg-[#1a1a1a] p-8 text-center text-red-300">
+            {error}
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-2">
+            {events.map((event) => (
+              <Link
+                key={event.id}
+                href={`/events/${event.id}`}
+                className="group block rounded-[28px] border border-gray-700 bg-[#1a1a1a] p-8 transition hover:shadow-lg"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gray-400">{new Date(event.date).toLocaleDateString()}</p>
+                    <h2 className="mt-3 text-2xl font-bold text-white">{event.title}</h2>
+                    <p className="mt-3 text-sm text-gray-400">{event.description ?? 'No description available.'}</p>
+                  </div>
+                  <div className="rounded-full bg-[#670626] px-6 py-3 text-sm font-semibold text-white whitespace-nowrap">
+                    View details
+                  </div>
                 </div>
-                <div className="rounded-full bg-[#670626] px-6 py-3 text-sm font-semibold text-white whitespace-nowrap">
-                  View details
+                <div className="mt-6 flex items-center justify-between text-sm text-gray-400">
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 text-[#670626]" />
+                    <span>{event.price ? `₦${event.price.toLocaleString()}` : 'Free'}</span>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold text-white">{new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p>{event.location}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-6 flex items-center justify-between text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 text-[#670626]" />
-                  <span>{event.rating}</span>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold text-white">{event.time}</p>
-                  <p>{event.venue}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

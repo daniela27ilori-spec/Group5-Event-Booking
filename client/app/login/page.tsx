@@ -1,11 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
-  const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,8 +22,12 @@ export default function Login() {
       return;
     }
 
-    router.push("/dashboard");
-    setLoading(false);
+    try {
+      await login(email, password);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to sign in. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (

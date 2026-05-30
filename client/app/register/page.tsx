@@ -1,11 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Register() {
-  const router = useRouter();
+  const { register } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,8 +29,12 @@ export default function Register() {
     }
 
     setLoading(true);
-    router.push("/dashboard");
-    setLoading(false);
+    try {
+      await register({ firstName, lastName, email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to create account. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (

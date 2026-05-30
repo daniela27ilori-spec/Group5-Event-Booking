@@ -67,10 +67,6 @@ public/uploads/
 # PM2 files
 .pm2/
 
-# Docker
-docker-compose.override.yml
-!docker-compose.yml
-
 # Backup files
 *.bak
 *.backup
